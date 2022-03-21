@@ -26,3 +26,24 @@ var scope = context.CreateScope(new Dictionary<string, object> {
     ["target"] = person
 });
 var result = (ReadOnlyMemory<byte>)JS.eval("serialize(target)", scope);
+
+var objDict = new ObjectDictionary { //inherits Dictionary<string,object>
+    ["one"] = 1,
+    ["foo"] = "bar"
+}
+
+var strDict = new StringDictionary { //inherits Dictionary<string,string>
+    ["one"] = "1",
+    ["foo"] = "bar"
+}
+
+var kvps = new KeyValuePairs {
+    KeyValuePairs.Create("one",1),
+    KeyValuePairs.Create("foo","bar"),
+};
+
+//instead of
+var kvps = new List<KeyValuePair<string,object>> {
+    new KeyValuePair<string,object>("one",1),
+    new KeyValuePair<string,object>("foo","bar"),
+}
